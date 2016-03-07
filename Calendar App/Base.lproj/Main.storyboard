@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Calendar Delegate-->
@@ -32,13 +33,37 @@
                                 <rect key="frame" x="0.0" y="499" width="600" height="101"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event" id="J08-6u-CUp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event" id="J08-6u-CUp" customClass="EventTableViewCell" customModule="Calendar_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J08-6u-CUp" id="8Xv-v4-aqL">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWP-GG-6IU">
+                                                    <rect key="frame" x="23" y="11" width="34" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQ3-UA-NEI">
+                                                    <rect key="frame" x="539" y="11" width="38" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xWP-GG-6IU" firstAttribute="leading" secondItem="8Xv-v4-aqL" secondAttribute="leadingMargin" constant="15" id="9Co-VH-d7u"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yQ3-UA-NEI" secondAttribute="trailing" constant="15" id="AXo-21-bsg"/>
+                                                <constraint firstItem="xWP-GG-6IU" firstAttribute="centerY" secondItem="8Xv-v4-aqL" secondAttribute="centerY" id="Eha-8P-AGj"/>
+                                                <constraint firstItem="yQ3-UA-NEI" firstAttribute="centerY" secondItem="8Xv-v4-aqL" secondAttribute="centerY" id="zeL-AO-VBh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventTimeLabel" destination="yQ3-UA-NEI" id="tzw-fe-K9D"/>
+                                            <outlet property="eventTitleLabel" destination="xWP-GG-6IU" id="Uhh-IW-Dkc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -71,17 +96,89 @@
                             <constraint firstAttribute="trailingMargin" secondItem="bJ2-jG-NbF" secondAttribute="trailing" constant="-20" id="wCm-2e-Twl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Month" id="oAA-nN-bnE">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zgc-fn-uW1"/>
+                    <navigationItem key="navigationItem" title="Month" id="oAA-nN-bnE" userLabel="Nav Bar">
+                        <leftBarButtonItems>
+                            <barButtonItem title="&lt;" id="zgb-AD-j68"/>
+                            <barButtonItem title="&gt;" id="oFu-r5-fWk"/>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="zgc-fn-uW1">
+                                <connections>
+                                    <segue destination="kfy-Go-Olh" kind="show" identifier="toAddEventViewController" id="zCJ-aU-TSA"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="detail" id="ugc-d4-HR1">
+                                <connections>
+                                    <action selector="goToEventDetail:" destination="BYZ-38-t0r" id="IxH-FY-Uze"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="01N-kV-geQ" id="6aw-ob-AYW"/>
                         <outlet property="menuView" destination="bJ2-jG-NbF" id="5Uy-Iu-uSw"/>
+                        <outlet property="monthLabel" destination="oAA-nN-bnE" id="vdB-V5-I0N"/>
+                        <outlet property="nextMonthButton" destination="oFu-r5-fWk" id="vYl-wB-uXp"/>
+                        <outlet property="prevMonthButton" destination="zgb-AD-j68" id="PhW-jT-oBb"/>
+                        <segue destination="l3O-JR-ffT" kind="show" identifier="toEventDetailViewController" id="PiO-b6-XwJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1117" y="429"/>
+        </scene>
+        <!--Create Event-->
+        <scene sceneID="mZg-Th-u5O">
+            <objects>
+                <viewController id="kfy-Go-Olh" customClass="AddEventViewController" customModule="Calendar_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NIf-28-gKj"/>
+                        <viewControllerLayoutGuide type="bottom" id="bMW-Or-7zi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v0t-lX-qCk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nt-TJ-KLW">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bMW-Or-7zi" firstAttribute="top" secondItem="9nt-TJ-KLW" secondAttribute="bottom" id="98C-hf-soW"/>
+                            <constraint firstAttribute="trailing" secondItem="9nt-TJ-KLW" secondAttribute="trailing" id="9k7-fY-OgB"/>
+                            <constraint firstItem="9nt-TJ-KLW" firstAttribute="top" secondItem="NIf-28-gKj" secondAttribute="bottom" id="pFn-hy-Cuu"/>
+                            <constraint firstItem="9nt-TJ-KLW" firstAttribute="leading" secondItem="v0t-lX-qCk" secondAttribute="leading" id="rfl-p7-Sfs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create Event" id="MFG-CN-6ll"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p90-I8-8FI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="256"/>
+        </scene>
+        <!--Event Detail View Controller-->
+        <scene sceneID="fye-pE-8zx">
+            <objects>
+                <viewController title="Event Detail View Controller" id="l3O-JR-ffT" customClass="EventDetailViewController" customModule="Calendar_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qam-4E-S3v"/>
+                        <viewControllerLayoutGuide type="bottom" id="fkk-e3-PiV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JPH-Sb-ndn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Event Detail" id="yyy-aC-2no">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="eBn-FZ-00O"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iQm-aC-nRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="958"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pCw-KI-BQM">
