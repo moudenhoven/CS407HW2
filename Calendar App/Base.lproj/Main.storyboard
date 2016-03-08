@@ -127,7 +127,7 @@
             </objects>
             <point key="canvasLocation" x="1117" y="429"/>
         </scene>
-        <!--Create Event-->
+        <!--Create A New Event-->
         <scene sceneID="mZg-Th-u5O">
             <objects>
                 <viewController id="kfy-Go-Olh" customClass="AddEventViewController" customModule="Calendar_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,19 +139,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nt-TJ-KLW">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybh-ba-cGu">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZI-v9-nUK" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N32-PY-i5L">
+                                                <rect key="frame" x="25" y="30" width="550" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="WPa-uI-692"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FXz-Lh-EyQ">
+                                                <rect key="frame" x="25" y="75" width="550" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="jTZ-n6-AQj"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mas-bu-t8z">
+                                                <rect key="frame" x="0.0" y="125" width="600" height="216"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="479063391.77447498">
+                                                    <!--2016-03-07 17:09:51 +0000-->
+                                                </date>
+                                            </datePicker>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Notes" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vJe-OW-MoI">
+                                                <rect key="frame" x="15" y="346" width="570" height="190"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="N32-PY-i5L" secondAttribute="trailing" constant="25" id="3hV-6x-QG7"/>
+                                            <constraint firstItem="FXz-Lh-EyQ" firstAttribute="top" secondItem="N32-PY-i5L" secondAttribute="bottom" constant="15" id="4sM-H6-mjz"/>
+                                            <constraint firstItem="mas-bu-t8z" firstAttribute="leading" secondItem="NZI-v9-nUK" secondAttribute="leading" id="7hO-ut-Dvd"/>
+                                            <constraint firstItem="N32-PY-i5L" firstAttribute="leading" secondItem="NZI-v9-nUK" secondAttribute="leading" constant="25" id="MtN-dM-HCA"/>
+                                            <constraint firstItem="mas-bu-t8z" firstAttribute="top" secondItem="FXz-Lh-EyQ" secondAttribute="bottom" constant="20" id="OCQ-rJ-efa"/>
+                                            <constraint firstItem="vJe-OW-MoI" firstAttribute="top" secondItem="mas-bu-t8z" secondAttribute="bottom" constant="5" id="Ueb-zK-odX"/>
+                                            <constraint firstAttribute="trailing" secondItem="vJe-OW-MoI" secondAttribute="trailing" constant="15" id="eQe-yj-85q"/>
+                                            <constraint firstItem="FXz-Lh-EyQ" firstAttribute="leading" secondItem="NZI-v9-nUK" secondAttribute="leading" constant="25" id="fIm-8E-oFf"/>
+                                            <constraint firstItem="N32-PY-i5L" firstAttribute="top" secondItem="NZI-v9-nUK" secondAttribute="top" constant="30" id="iU2-nT-St7"/>
+                                            <constraint firstItem="vJe-OW-MoI" firstAttribute="leading" secondItem="NZI-v9-nUK" secondAttribute="leading" constant="15" id="kTA-9F-Vj9"/>
+                                            <constraint firstAttribute="bottom" secondItem="vJe-OW-MoI" secondAttribute="bottom" id="knb-18-arc"/>
+                                            <constraint firstAttribute="trailing" secondItem="mas-bu-t8z" secondAttribute="trailing" id="qMB-NA-Zoh"/>
+                                            <constraint firstAttribute="trailing" secondItem="FXz-Lh-EyQ" secondAttribute="trailing" constant="25" id="sZt-Jk-8ad"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="NZI-v9-nUK" firstAttribute="centerX" secondItem="ybh-ba-cGu" secondAttribute="centerX" id="3Qy-qM-3bn"/>
+                                    <constraint firstAttribute="trailing" secondItem="NZI-v9-nUK" secondAttribute="trailing" id="EzZ-DH-ZVJ"/>
+                                    <constraint firstItem="NZI-v9-nUK" firstAttribute="top" secondItem="ybh-ba-cGu" secondAttribute="top" id="Rll-hB-H81"/>
+                                    <constraint firstAttribute="bottom" secondItem="NZI-v9-nUK" secondAttribute="bottom" id="UIX-02-Q7v"/>
+                                    <constraint firstItem="NZI-v9-nUK" firstAttribute="centerY" secondItem="ybh-ba-cGu" secondAttribute="centerY" id="eh4-rP-McS"/>
+                                    <constraint firstItem="NZI-v9-nUK" firstAttribute="leading" secondItem="ybh-ba-cGu" secondAttribute="leading" id="yrL-is-dw4"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bMW-Or-7zi" firstAttribute="top" secondItem="9nt-TJ-KLW" secondAttribute="bottom" id="98C-hf-soW"/>
-                            <constraint firstAttribute="trailing" secondItem="9nt-TJ-KLW" secondAttribute="trailing" id="9k7-fY-OgB"/>
-                            <constraint firstItem="9nt-TJ-KLW" firstAttribute="top" secondItem="NIf-28-gKj" secondAttribute="bottom" id="pFn-hy-Cuu"/>
-                            <constraint firstItem="9nt-TJ-KLW" firstAttribute="leading" secondItem="v0t-lX-qCk" secondAttribute="leading" id="rfl-p7-Sfs"/>
+                            <constraint firstItem="bMW-Or-7zi" firstAttribute="top" secondItem="ybh-ba-cGu" secondAttribute="bottom" id="CmD-SV-k6A"/>
+                            <constraint firstAttribute="trailing" secondItem="ybh-ba-cGu" secondAttribute="trailing" id="Pbr-th-T0u"/>
+                            <constraint firstItem="ybh-ba-cGu" firstAttribute="leading" secondItem="v0t-lX-qCk" secondAttribute="leading" id="Zvw-lL-8vi"/>
+                            <constraint firstItem="ybh-ba-cGu" firstAttribute="top" secondItem="NIf-28-gKj" secondAttribute="bottom" id="huY-O2-DkM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Event" id="MFG-CN-6ll"/>
+                    <navigationItem key="navigationItem" title="Create A New Event" id="MFG-CN-6ll">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="oxL-Mo-eQh"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="scrollView" destination="ybh-ba-cGu" id="Z9k-BI-GzY"/>
+                        <outlet property="scrollViewHeightConstraint" destination="UIX-02-Q7v" id="g17-lC-w2Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p90-I8-8FI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -172,7 +237,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Event Detail" id="yyy-aC-2no">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="eBn-FZ-00O"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBn-FZ-00O"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
