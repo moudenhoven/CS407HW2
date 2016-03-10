@@ -211,7 +211,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create A New Event" id="MFG-CN-6ll">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="oxL-Mo-eQh"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="oxL-Mo-eQh">
+                            <connections>
+                                <action selector="saveClicked:" destination="kfy-Go-Olh" id="7ks-1Q-Xk2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="scrollView" destination="ybh-ba-cGu" id="Z9k-BI-GzY"/>
@@ -233,13 +237,76 @@
                     <view key="view" contentMode="scaleToFill" id="JPH-Sb-ndn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-uP-4lQ">
+                                <rect key="frame" x="40" y="120" width="520" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uur-el-E42">
+                                <rect key="frame" x="40" y="156" width="520" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Non-editable notes" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF9-pD-X3F">
+                                <rect key="frame" x="40" y="192" width="520" height="262"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1b-uT-kTd">
+                                <rect key="frame" x="175" y="474" width="250" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="ota-a2-K3g"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Delete Event">
+                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteClicked:" destination="l3O-JR-ffT" eventType="touchUpInside" id="1Od-mc-Am2"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-PA-NEp">
+                                <rect key="frame" x="40" y="84" width="520" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rF9-pD-X3F" firstAttribute="top" secondItem="Uur-el-E42" secondAttribute="bottom" constant="15" id="228-rp-2hE"/>
+                            <constraint firstItem="rF9-pD-X3F" firstAttribute="leading" secondItem="JPH-Sb-ndn" secondAttribute="leadingMargin" constant="20" id="6xt-mM-vfr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dre-uP-4lQ" secondAttribute="trailing" constant="20" id="BzL-RE-LCY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uur-el-E42" secondAttribute="trailing" constant="20" id="EAh-xC-kBp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rF9-pD-X3F" secondAttribute="trailing" constant="20" id="FnO-uv-deP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dfL-PA-NEp" secondAttribute="trailing" constant="20" id="GmV-U5-Cec"/>
+                            <constraint firstItem="Uur-el-E42" firstAttribute="leading" secondItem="JPH-Sb-ndn" secondAttribute="leadingMargin" constant="20" id="Qcr-27-zds"/>
+                            <constraint firstItem="dfL-PA-NEp" firstAttribute="leading" secondItem="JPH-Sb-ndn" secondAttribute="leadingMargin" constant="20" id="R80-oa-U25"/>
+                            <constraint firstItem="a1b-uT-kTd" firstAttribute="top" secondItem="rF9-pD-X3F" secondAttribute="bottom" constant="20" id="RCI-Zn-hRP"/>
+                            <constraint firstItem="Dre-uP-4lQ" firstAttribute="leading" secondItem="JPH-Sb-ndn" secondAttribute="leadingMargin" constant="20" id="UlW-zV-zpL"/>
+                            <constraint firstItem="fkk-e3-PiV" firstAttribute="top" secondItem="a1b-uT-kTd" secondAttribute="bottom" constant="40" id="XEs-jZ-mbI"/>
+                            <constraint firstItem="dfL-PA-NEp" firstAttribute="top" secondItem="Qam-4E-S3v" secondAttribute="bottom" constant="20" id="ZO8-di-Fvg"/>
+                            <constraint firstItem="Dre-uP-4lQ" firstAttribute="top" secondItem="dfL-PA-NEp" secondAttribute="bottom" constant="15" id="mQZ-Ot-xiZ"/>
+                            <constraint firstItem="a1b-uT-kTd" firstAttribute="centerX" secondItem="JPH-Sb-ndn" secondAttribute="centerX" id="v6k-5X-ryO"/>
+                            <constraint firstItem="Uur-el-E42" firstAttribute="top" secondItem="Dre-uP-4lQ" secondAttribute="bottom" constant="15" id="weJ-f8-Ji1"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Event Detail" id="yyy-aC-2no">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBn-FZ-00O"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteEventButton" destination="a1b-uT-kTd" id="GJp-h8-9fu"/>
+                        <outlet property="eventDateLabel" destination="Uur-el-E42" id="te6-dm-93L"/>
+                        <outlet property="eventTimeLabel" destination="Dre-uP-4lQ" id="JhG-pv-ebw"/>
+                        <outlet property="eventTitleLabel" destination="dfL-PA-NEp" id="H3Z-6D-0e6"/>
+                        <outlet property="notesTextView" destination="rF9-pD-X3F" id="rUc-NN-6UQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQm-aC-nRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

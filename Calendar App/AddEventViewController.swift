@@ -48,6 +48,26 @@ class AddEventViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - IBActions
+    @IBAction func saveClicked(sender: AnyObject) {
+        //use UIActivity indicator view
+        
+        
+        
+    }
+    
+    
+    //MARK: - CoreData
+    func saveEvent(title: NSString, time: NSString, date: NSDate, notes: NSString) {
+        
+        
+        
+        
+        
+        
+    }
+    
+    
     
     //MARK: - Observer Methods
     
