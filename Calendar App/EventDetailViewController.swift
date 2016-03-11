@@ -24,7 +24,7 @@ class EventDetailViewController: UIViewController {
     var fullDate : String?
     var notes : String?
     
-    var event = NSManagedObject()
+    var event : NSManagedObject!
     
     //MARK: - Lifecycle
     
@@ -59,6 +59,9 @@ class EventDetailViewController: UIViewController {
         let managedContext = appDelegate.managedObjectContext
 
         managedContext.deleteObject(event)
+        
+        //go back to the calendar view, event deleted
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
 

@@ -75,8 +75,20 @@
                                 <rect key="frame" x="0.0" y="99" width="600" height="400"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="ac6-Bu-5IC"/>
+                                    <constraint firstAttribute="width" priority="750" constant="600" id="N3o-v3-xFQ"/>
+                                    <constraint firstAttribute="height" priority="750" constant="400" id="ac6-Bu-5IC"/>
+                                    <constraint firstAttribute="height" constant="250" id="zgm-2C-bCy"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="zgm-2C-bCy"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="zgm-2C-bCy"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="calendarDelegate" destination="BYZ-38-t0r" id="2ib-L3-8Gd"/>
                                 </connections>
@@ -101,18 +113,11 @@
                             <barButtonItem title="&lt;" id="zgb-AD-j68"/>
                             <barButtonItem title="&gt;" id="oFu-r5-fWk"/>
                         </leftBarButtonItems>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="zgc-fn-uW1">
-                                <connections>
-                                    <segue destination="kfy-Go-Olh" kind="show" identifier="toAddEventViewController" id="zCJ-aU-TSA"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="detail" id="ugc-d4-HR1">
-                                <connections>
-                                    <action selector="goToEventDetail:" destination="BYZ-38-t0r" id="IxH-FY-Uze"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zgc-fn-uW1">
+                            <connections>
+                                <segue destination="kfy-Go-Olh" kind="show" identifier="toAddEventViewController" id="zCJ-aU-TSA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="01N-kV-geQ" id="6aw-ob-AYW"/>
@@ -244,21 +249,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-uP-4lQ">
-                                <rect key="frame" x="40" y="120" width="520" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="40" y="123" width="520" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uur-el-E42">
-                                <rect key="frame" x="40" y="156" width="520" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="40" y="162" width="520" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Non-editable notes" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF9-pD-X3F">
-                                <rect key="frame" x="40" y="192" width="520" height="262"/>
+                                <rect key="frame" x="40" y="201" width="520" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1b-uT-kTd">
@@ -275,8 +280,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-PA-NEp">
-                                <rect key="frame" x="40" y="84" width="520" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="40" y="84" width="520" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

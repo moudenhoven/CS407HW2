@@ -22,7 +22,7 @@ class AddEventViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var notesTextView: UITextView!
     
-    //var eventAdded  : NSManagedObject? = NSManagedObject()
+    var eventAdded : NSManagedObject!
     
     
     //MARK: - Lifecycle
@@ -64,7 +64,7 @@ class AddEventViewController: UIViewController {
         //save to core  data
         saveEvent()
         
-        
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     
@@ -86,7 +86,7 @@ class AddEventViewController: UIViewController {
         do{
             try managedContext.save()
             
-            //self.eventAdded = event
+            self.eventAdded = event
         } catch let error as NSError {
             print("could not save \(error), \(error.userInfo)")
         }
@@ -123,7 +123,7 @@ class AddEventViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        print("prepare for segue")
+        //print("prepare for segue")
     }
     
     

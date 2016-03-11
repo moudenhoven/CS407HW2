@@ -95,8 +95,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.calendarView.commitCalendarViewUpdate()
         self.menuView.commitMenuViewUpdate()
         
-
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -175,9 +173,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: - IBActions
 
+    /*
+    //method used until full functionality was implemented
     @IBAction func goToEventDetail(sender: AnyObject) {
         self.performSegueWithIdentifier("toEventDetailViewController", sender: self)
     }
+*/
     
     //MARK: - Navigation    
     
@@ -210,7 +211,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             destVC.notes = notes!
             
             //give destVC the event object in case the user deletes it
-            //destVC.event = event!
+            destVC.event = event!
             
         }
     }
