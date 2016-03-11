@@ -73,7 +73,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01N-kV-geQ" customClass="CVCalendarView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="99" width="600" height="400"/>
-                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="400" id="ac6-Bu-5IC"/>
                                 </constraints>
@@ -120,12 +120,13 @@
                         <outlet property="monthLabel" destination="oAA-nN-bnE" id="vdB-V5-I0N"/>
                         <outlet property="nextMonthButton" destination="oFu-r5-fWk" id="vYl-wB-uXp"/>
                         <outlet property="prevMonthButton" destination="zgb-AD-j68" id="PhW-jT-oBb"/>
+                        <outlet property="tableView" destination="RUq-xc-coS" id="HEN-vw-36e"/>
                         <segue destination="l3O-JR-ffT" kind="show" identifier="toEventDetailViewController" id="PiO-b6-XwJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="429"/>
+            <point key="canvasLocation" x="1116" y="429"/>
         </scene>
         <!--Create A New Event-->
         <scene sceneID="mZg-Th-u5O">
@@ -153,14 +154,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FXz-Lh-EyQ">
-                                                <rect key="frame" x="25" y="75" width="550" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="jTZ-n6-AQj"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="mas-bu-t8z">
                                                 <rect key="frame" x="0.0" y="125" width="600" height="216"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="479063391.77447498">
@@ -173,6 +166,14 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FXz-Lh-EyQ">
+                                                <rect key="frame" x="25" y="75" width="550" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="jTZ-n6-AQj"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -213,13 +214,17 @@
                     <navigationItem key="navigationItem" title="Create A New Event" id="MFG-CN-6ll">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="oxL-Mo-eQh">
                             <connections>
-                                <action selector="saveClicked:" destination="kfy-Go-Olh" id="7ks-1Q-Xk2"/>
+                                <action selector="saveClicked:" destination="kfy-Go-Olh" id="i9V-Rz-dZM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="datePicker" destination="mas-bu-t8z" id="4WL-os-SMu"/>
+                        <outlet property="locationField" destination="FXz-Lh-EyQ" id="bjB-OF-HeT"/>
+                        <outlet property="notesTextView" destination="vJe-OW-MoI" id="qTx-Dh-1tg"/>
                         <outlet property="scrollView" destination="ybh-ba-cGu" id="Z9k-BI-GzY"/>
                         <outlet property="scrollViewHeightConstraint" destination="UIX-02-Q7v" id="g17-lC-w2Y"/>
+                        <outlet property="titleField" destination="N32-PY-i5L" id="3aG-nM-lOn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p90-I8-8FI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -296,9 +301,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Event Detail" id="yyy-aC-2no">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="eBn-FZ-00O"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Event Detail" id="yyy-aC-2no"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="deleteEventButton" destination="a1b-uT-kTd" id="GJp-h8-9fu"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EventDetailViewController: UIViewController {
 
@@ -17,6 +18,13 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var deleteEventButton: UIButton!
     
+    //values to pass to the labels - labels not initialized in prepareForSegue method call
+    var labelTitle : String?
+    var time : String?
+    var fullDate : String?
+    var notes : String?
+    
+    var event = NSManagedObject()
     
     //MARK: - Lifecycle
     
@@ -30,6 +38,14 @@ class EventDetailViewController: UIViewController {
         deleteEventButton.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).CGColor
         deleteEventButton.layer.borderWidth = 1
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        //update the labels to the correct values
+        eventTitleLabel.text = labelTitle!
+        eventTimeLabel.text = time!
+        eventDateLabel.text = fullDate!
+        notesTextView.text = notes!
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,8 +55,10 @@ class EventDetailViewController: UIViewController {
     
     //MARK: - IBActions
     @IBAction func deleteClicked(sender: AnyObject) {
-        
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+
+        managedContext.deleteObject(event)
     }
     
 

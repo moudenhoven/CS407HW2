@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddEventViewController: UIViewController {
 
@@ -15,6 +16,13 @@ class AddEventViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewHeightConstraint : NSLayoutConstraint!
     var defaultScrollViewHeightConstraint : CGFloat = 0.0
+    
+    @IBOutlet weak var titleField: UITextField!
+    @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var notesTextView: UITextView!
+    
+    //var eventAdded  : NSManagedObject? = NSManagedObject()
     
     
     //MARK: - Lifecycle
@@ -52,17 +60,36 @@ class AddEventViewController: UIViewController {
     @IBAction func saveClicked(sender: AnyObject) {
         //use UIActivity indicator view
         
+
+        //save to core  data
+        saveEvent()
         
         
     }
     
     
     //MARK: - CoreData
-    func saveEvent(title: NSString, time: NSString, date: NSDate, notes: NSString) {
+    func saveEvent() {
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
         
+        let entity = NSEntityDescription.entityForName("Event", inManagedObjectContext: managedContext)
         
+        let event = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
+        event.setValue(titleField!.text, forKey: "title")
+        event.setValue(notesTextView!.text, forKey: "notes")
+        event.setValue(datePicker.date, forKey: "date")
+        event.setValue(locationField!.text, forKey: "location")
+        
+        do{
+            try managedContext.save()
+            
+            //self.eventAdded = event
+        } catch let error as NSError {
+            print("could not save \(error), \(error.userInfo)")
+        }
         
         
     }
@@ -88,14 +115,34 @@ class AddEventViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        print("prepare for segue")
     }
-    */
+    
+    
+    
+    
+    func formatDate(date: NSDate) {
+        /*
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = .ShortStyle
+        
+        let fullDate = formatter.stringFromDate(datePicker.date)
+        print(fullDate)
+        
+        let delimiter = ", "
+        let dateArray = fullDate.componentsSeparatedByString(delimiter)
+        let time = dateArray[1]
+        let date = dateArray[0]
+*/
+    }
 
 }
