@@ -34,13 +34,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //dictionary holding all of the events for the calendar - year as the key, and month then day for the 2D array
     //var eventsDictionary : NSDictionary = [2016: Array<Array<NSManagedObject>>()]
+    var eventsDictonary : [String : [String : [String : Array<NSManagedObject>]]] = ["2016" : ["1" : ["5" : [NSManagedObject]()]]]
     
+    //array of event objects (unsorted) returned when finding the persisting data
+    var savedEvents : [NSManagedObject] = []
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
         monthLabel.title = CVDate(date: NSDate()).globalDescription
         
@@ -71,19 +75,79 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let fetchRequest = NSFetchRequest(entityName: "Event")
         
+        
+        
         do{
             //get the results fromt the fetch
             let results = try managedContext.executeFetchRequest(fetchRequest)
             //save the array of results as the events
-            events = results as! [NSManagedObject]
+            //events = results as! [NSManagedObject]
+            
+            savedEvents = results as! [NSManagedObject]
             
             
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         
+        //load the dictionary of events into the correct format
+        loadDictionary()
+        
         //reload the table view after the new data is fetched
         tableView.reloadData()
+    }
+    
+    //method to load the dictionary with the events into the right spots
+    func loadDictionary(){
+        //loop through the saved events and get their year
+        for event in savedEvents {
+            let eventDate = event.valueForKey("date") as! NSDate
+            let year = String(yearFromDate(eventDate))
+            let eventMonth = monthFromDate(eventDate)
+            let month = String(eventMonth)
+            let eventDay = String(dayFromDate(eventDate))
+            
+            //check if that year is currently in the dictionary
+            if eventsDictonary[year] != nil {
+                //year currently in the dictionary
+
+                //check if the month is in the year
+                if eventsDictonary[year]?[month] != nil {
+                    //month is in the year, check if the day alreay has an event
+                    if eventsDictonary[year]?[month]?[eventDay] != nil {
+                        //there is at least one event already on this date, add the event to the end of the array
+                        
+                    }
+                    
+                    //no events currently on this day
+                    else {
+                        //eventsDictonary[year]?[month].
+                    }
+                    
+                    
+                }
+                
+            
+                //month not in the current year make it
+                else {
+                    eventsDictonary[year]?[month] = [eventDay : [event]]
+                    
+                }
+                
+            }
+            
+            //else intialize the new dictionary since it isn't in the dictionary
+            else {
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -139,9 +203,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //send the event with the segue
-        print(indexPath.row)
-        let toSend = events[indexPath.row]
+        //print(indexPath.row)
         
+        //get the event that the user clicked on and send it with the segue
+        let toSend = events[indexPath.row]
         self.performSegueWithIdentifier("toEventDetailViewController", sender: toSend)
     }
     
@@ -319,6 +384,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return year!
         
     }
+    
+    //MARK: - Event Handling
+    
+
     
 
 }
