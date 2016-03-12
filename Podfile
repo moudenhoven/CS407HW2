@@ -4,7 +4,7 @@
 use_frameworks!
 
 target 'Calendar App' do
-pod 'CVCalendar', '~> 1.2.9'
+pod 'CVCalendar', '~> 1.2.8’
 end
 
 target 'Calendar AppTests' do

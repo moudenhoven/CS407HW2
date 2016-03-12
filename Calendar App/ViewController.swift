@@ -34,6 +34,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //dictionary holding all of the events for the calendar - year as the key, and month then day for the 2D array
     //var eventsDictionary : NSDictionary = [2016: Array<Array<NSManagedObject>>()]
+    var eventsDictonary : [String : [String : [String : Array<NSManagedObject>]]] = ["16" : ["1" : ["5" : [NSManagedObject]()]]]
+    
+    //array of event objects (unsorted) returned when finding the persisting data
+    var savedEvents : [NSManagedObject] = []
+    
+    var firstLoad = true
     
     
     //MARK: - Lifecycle
@@ -41,6 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
         monthLabel.title = CVDate(date: NSDate()).globalDescription
         
@@ -60,7 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func viewWillAppear(animated: Bool) {
-        //print(calendarView)
+        //print("view will appear")
         calendarView.hidden = false
         
         
@@ -71,29 +78,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let fetchRequest = NSFetchRequest(entityName: "Event")
         
+        
+        
         do{
             //get the results fromt the fetch
             let results = try managedContext.executeFetchRequest(fetchRequest)
             //save the array of results as the events
             events = results as! [NSManagedObject]
             
+            savedEvents = results as! [NSManagedObject]
+            
             
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         
+        //load the dictionary of events into the correct format
+        loadDictionary()
+        
         //reload the table view after the new data is fetched
         tableView.reloadData()
     }
+    
+    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+ 
+        self.calendarView.commitCalendarViewUpdate()
+        self.menuView.commitMenuViewUpdate()
         
         //show the old days from the previous and next month
         calendarView.changeDaysOutShowingState(false)
-        
-        self.calendarView.commitCalendarViewUpdate()
-        self.menuView.commitMenuViewUpdate()
         
     }
     
@@ -139,9 +155,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: - UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //send the event with the segue
-        print(indexPath.row)
-        let toSend = events[indexPath.row]
+        //print(indexPath.row)
         
+        //get the event that the user clicked on and send it with the segue
+        let toSend = events[indexPath.row]
         self.performSegueWithIdentifier("toEventDetailViewController", sender: toSend)
     }
     
@@ -165,8 +182,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
         //print("selected a day!")
         
-        //update table view to new events
+        let month = String(dayView.date.month)
+        let day = String(dayView.date.day)
         
+        let temp = String(dayView.date.year)
+        //let year = temp.substringFromIndex(2)
+        let x = temp.startIndex.advancedBy(2)..<temp.endIndex
+        let year = temp[x]
+        
+        //print(dayView.date.month)
+        //print(dayView.date.day)
+        //print(dayView.date.year)
+        
+        //update table view to new events
+        if eventsDictonary[year]?[month]?[day] != nil {
+            events = (eventsDictonary[year]?[month]?[day])!
+        }
+        //no events, empty array
+        else {
+            events = []
+        }
+        
+        //reload the table
+        tableView.reloadData()
     }
     
 
@@ -178,7 +216,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func goToEventDetail(sender: AnyObject) {
         self.performSegueWithIdentifier("toEventDetailViewController", sender: self)
     }
-*/
+    */
     
     //MARK: - Navigation    
     
@@ -315,11 +353,89 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         delimiter = "/"
         let dateSplit = date.componentsSeparatedByString(delimiter)
         
-        let year = Int(dateSplit[1])
+        let year = Int(dateSplit[2])
         return year!
         
     }
     
+    
+    
+    //MARK: - Event Handling
+    
+    //method to load the dictionary with the events into the right spots
+    func loadDictionary(){
+        //clear the events dictionary so that it can be resorted
+        eventsDictonary = ["16" : ["1" : ["5" : [NSManagedObject]()]]]
+        
+        //loop through the saved events and get their year
+        for event in savedEvents {
+            let eventDate = event.valueForKey("date") as! NSDate
+            let year = String(yearFromDate(eventDate))
+            let eventMonth = monthFromDate(eventDate)
+            let month = String(eventMonth)
+            let eventDay = String(dayFromDate(eventDate))
+            
+            //check if that year is currently in the dictionary
+            if eventsDictonary[year] != nil {
+                //year currently in the dictionary
+                
+                //check if the month is in the year
+                if eventsDictonary[year]?[month] != nil {
+                    //month is in the year, check if the day alreay has an event
+                    if eventsDictonary[year]?[month]?[eventDay] != nil {
+                        //there is at least one event already on this date, add the event to the end of the array
+                        
+                        //get the array from the dictoinary
+                        var array = eventsDictonary[year]?[month]?[eventDay]
+                        //add the event on the end of the array
+                        array?.append(event)
+                        
+                        //reset the value of the array in the dictionary
+                        eventsDictonary[year]?[month]?[eventDay] = array
+                        
+                    }
+                    //no events currently on this day
+                    else {
+                        eventsDictonary[year]?[month]?[eventDay] = [event]
+                    }
+                }
+
+                //month not in the current year make it
+                else {
+                    eventsDictonary[year]?[month] = [eventDay : [event]]
+                    
+                }
+            }
+            //else intialize the new dictionary since it isn't in the dictionary
+            else {
+                //add the event to the dictionary
+                eventsDictonary[year] = [month : [eventDay : [event]]]
+            }
+        }
+        
+        
+        
+        
+        //clear the events out of the array to put the new ones in
+        events = []
+        //get all the info on today's date
+        let currDate = NSDate()
+        let year = String(yearFromDate(currDate))
+        let month = String(monthFromDate(currDate))
+        let day = String(dayFromDate(currDate))
+        //get the events from the dictonary to display
+        //events = (eventsDictonary[year]?[month]?[day])!
+        
+        //update table view to new events
+        if eventsDictonary[year]?[month]?[day] != nil {
+            events = (eventsDictonary[year]?[month]?[day])!
+        }
+            //no events, empty array
+        else {
+            events = []
+        }
+        
+    }
 
 }
 

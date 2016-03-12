@@ -71,38 +71,26 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hOq-B8-fOe"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="01N-kV-geQ" customClass="CVCalendarView" customModule="CVCalendar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FbP-zT-YdP" customClass="CVCalendarView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="99" width="600" height="400"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="600" id="N3o-v3-xFQ"/>
-                                    <constraint firstAttribute="height" priority="750" constant="400" id="ac6-Bu-5IC"/>
-                                    <constraint firstAttribute="height" constant="250" id="zgm-2C-bCy"/>
+                                    <constraint firstAttribute="height" constant="400" id="UUX-ws-e9A"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="zgm-2C-bCy"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="zgm-2C-bCy"/>
-                                    </mask>
-                                </variation>
                                 <connections>
-                                    <outlet property="calendarDelegate" destination="BYZ-38-t0r" id="2ib-L3-8Gd"/>
+                                    <outlet property="calendarDelegate" destination="BYZ-38-t0r" id="K9n-g5-gOP"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="01N-kV-geQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="7dZ-QU-iiv"/>
+                            <constraint firstItem="FbP-zT-YdP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3nF-kn-1b0"/>
+                            <constraint firstItem="RUq-xc-coS" firstAttribute="top" secondItem="FbP-zT-YdP" secondAttribute="bottom" id="6Ai-lb-D6s"/>
+                            <constraint firstAttribute="trailing" secondItem="FbP-zT-YdP" secondAttribute="trailing" id="Cik-92-jvD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RUq-xc-coS" secondAttribute="trailing" constant="-20" id="E4x-Lg-1Nk"/>
-                            <constraint firstItem="RUq-xc-coS" firstAttribute="top" secondItem="01N-kV-geQ" secondAttribute="bottom" id="JIl-MQ-5v9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="01N-kV-geQ" secondAttribute="trailing" constant="-20" id="RuS-gB-WTV"/>
                             <constraint firstAttribute="bottomMargin" secondItem="RUq-xc-coS" secondAttribute="bottom" id="d18-bv-zEI"/>
                             <constraint firstItem="bJ2-jG-NbF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="eyo-gp-0zA"/>
-                            <constraint firstItem="01N-kV-geQ" firstAttribute="top" secondItem="bJ2-jG-NbF" secondAttribute="bottom" id="iCX-G3-HHN"/>
+                            <constraint firstItem="FbP-zT-YdP" firstAttribute="top" secondItem="bJ2-jG-NbF" secondAttribute="bottom" id="opT-dl-bgJ"/>
                             <constraint firstItem="RUq-xc-coS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="teN-au-9ER"/>
                             <constraint firstItem="bJ2-jG-NbF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uQ0-L5-KUx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bJ2-jG-NbF" secondAttribute="trailing" constant="-20" id="wCm-2e-Twl"/>
@@ -120,7 +108,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="calendarView" destination="01N-kV-geQ" id="6aw-ob-AYW"/>
+                        <outlet property="calendarView" destination="FbP-zT-YdP" id="Owd-3w-HMP"/>
                         <outlet property="menuView" destination="bJ2-jG-NbF" id="5Uy-Iu-uSw"/>
                         <outlet property="monthLabel" destination="oAA-nN-bnE" id="vdB-V5-I0N"/>
                         <outlet property="nextMonthButton" destination="oFu-r5-fWk" id="vYl-wB-uXp"/>
@@ -234,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p90-I8-8FI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1785" y="256"/>
+            <point key="canvasLocation" x="2597" y="256"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="fye-pE-8zx">
@@ -251,19 +239,19 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-uP-4lQ">
                                 <rect key="frame" x="40" y="123" width="520" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uur-el-E42">
                                 <rect key="frame" x="40" y="162" width="520" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Non-editable notes" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF9-pD-X3F">
                                 <rect key="frame" x="40" y="201" width="520" height="253"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a1b-uT-kTd">
@@ -282,7 +270,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-PA-NEp">
                                 <rect key="frame" x="40" y="84" width="520" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
